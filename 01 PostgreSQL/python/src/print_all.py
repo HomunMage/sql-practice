@@ -1,4 +1,4 @@
-# add.py
+# print_all.py
 import psycopg2
 import os
 
@@ -22,24 +22,17 @@ try:
     # Create a cursor object
     cur = conn.cursor()
 
-    # Step 2: Insert two student records
-    cur.execute("""
-        INSERT INTO student_scores (name, score)
-        VALUES
-        ('Alice', 85),
-        ('Bob', 92);
-    """)
-    print("Two student records inserted successfully.")
-
-    # Commit the transaction to ensure data is saved
-    conn.commit()
-
-    # Step 3: Fetch and print the student records
+    # Step 1: Fetch all student records
     cur.execute("SELECT * FROM student_scores;")
     students = cur.fetchall()
-    print("Student Scores:")
-    for student in students:
-        print(f"ID: {student[0]}, Name: {student[1]}, Score: {student[2]}")
+
+    # Step 2: Print all student records
+    print("All Student Records:")
+    if students:
+        for student in students:
+            print(f"ID: {student[0]}, Name: {student[1]}, Score: {student[2]}")
+    else:
+        print("No student records found.")
 
     # Close cursor and connection
     cur.close()

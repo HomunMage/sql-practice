@@ -12,7 +12,6 @@ services:
       - ./postgres_data:/var/lib/postgresql/data
     networks:
       - db-network
-    user: "${MY_UID}:${MY_GID}"  # Use MY_UID and MY_GID 
 
   py2db:
     build: ./python
@@ -32,3 +31,4 @@ services:
 networks:
   db-network:
     driver: bridge
+

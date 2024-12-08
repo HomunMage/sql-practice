@@ -1,4 +1,4 @@
-# add.py
+# create.py
 import psycopg2
 import os
 
@@ -22,24 +22,18 @@ try:
     # Create a cursor object
     cur = conn.cursor()
 
-    # Step 2: Insert two student records
+    # Step 1: Create the student_scores table
     cur.execute("""
-        INSERT INTO student_scores (name, score)
-        VALUES
-        ('Alice', 85),
-        ('Bob', 92);
+        CREATE TABLE IF NOT EXISTS student_scores (
+            student_id SERIAL PRIMARY KEY,
+            name VARCHAR(100),
+            score INTEGER
+        );
     """)
-    print("Two student records inserted successfully.")
+    print("Table 'student_scores' created successfully or already exists.")
 
-    # Commit the transaction to ensure data is saved
+    # Commit the transaction to make sure changes are saved
     conn.commit()
-
-    # Step 3: Fetch and print the student records
-    cur.execute("SELECT * FROM student_scores;")
-    students = cur.fetchall()
-    print("Student Scores:")
-    for student in students:
-        print(f"ID: {student[0]}, Name: {student[1]}, Score: {student[2]}")
 
     # Close cursor and connection
     cur.close()

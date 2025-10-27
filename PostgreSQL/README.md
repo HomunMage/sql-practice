@@ -1,6 +1,5 @@
 # SQL Learning
 
-
 This project is a set of exercises for learning SQL with PostgreSQL. It includes examples of creating databases, tables, inserting data, and querying information using PostgreSQL, all executed in a Docker environment with Python scripts.
 
 ## 01 Hello PostgreSQL
@@ -18,13 +17,23 @@ docker compose up
 
 connect db
 ```
-docker compose exec backend python src/main.py
+docker compose exec backend python src/01/main.py
 ```
 
 leave
 ```
 docker compose down
 ```
+
+* related files:
+    * ```.env```
+    * Dockerfile
+    * docker-compose.yml
+    * requirements.txt
+    * ```src/model/__init__.py```
+    * ```src/model/db.py```
+    * ```src/01/main.py```
+
 
 ## 02 Add Tables
 

@@ -1,10 +1,5 @@
 .env
 
-postgres_data/
-
-package-lock.json
-node_modules/
-
 workspace/
 temp/
 *.log

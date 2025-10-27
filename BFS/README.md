@@ -1,4 +1,14 @@
-# SQL Learning - 02 PostgreSQL Graph
+# SQL Learning use BFS as example
+
+
+## how to run this
+```
+docker compose build
+docker compose up -d
+docker compose exec py2db python create_graph.py
+docker compose exec py2db python data_insertion.py
+docker compose exec py2db python bfs_query.py
+```
 
 
 ## Scenario: Demonstrating Graph-like Behavior in PostgreSQL Using BFS
@@ -24,11 +34,3 @@ To analyze this network, we use **Breadth-First Search (BFS)** to traverse from 
 By running the BFS query, we can analyze the graph-like structure and gain insights, all within the relational database paradigm. This demonstrates how PostgreSQL can handle graph-like problems without needing specialized graph database tools.
 
 
-## how to run this
-```
-docker compose build
-docker compose up -d
-docker compose exec py2db python create_graph.py
-docker compose exec py2db python data_insertion.py
-docker compose exec py2db python bfs_query.py
-```

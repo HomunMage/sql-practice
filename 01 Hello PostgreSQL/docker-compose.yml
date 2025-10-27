@@ -1,34 +1,39 @@
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres-db
-    environment:
-      POSTGRES_PASSWORD: yourpassword
-      POSTGRES_USER: yourusername
-      POSTGRES_DB: yourdb
-    ports:
-      - "127.0.0.1:5432:5432"
+  backend:
+    build:
+      context: ./backend
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ./backend/src/:/app/src/
+    environment:
+      POSTGRES_URL: db:5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     networks:
-      - db-network
+      - shared-network
+      - app-network
+    tty: true
+    stdin_open: true
+    command: tail -f /dev/null
 
-  py2db:
-    build: ./python
-    container_name: py2db
+  db:
+    image: postgres:18
+    restart: always
     environment:
-      DB_HOST: postgres-db
-      DB_NAME: yourdb
-      DB_USER: yourusername
-      DB_PASSWORD: yourpassword
-    depends_on:
-      - postgres
-    networks:
-      - db-network
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - ./python/src:/app
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
 networks:
-  db-network:
+  app-network:
     driver: bridge
 
+  shared-network:
+    external: true
+
+volumes:
+  pg_data:

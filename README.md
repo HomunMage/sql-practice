@@ -1,2 +1,3 @@
 # sql-practice
-Practice using SQL
+
+Learning and Practice SQL

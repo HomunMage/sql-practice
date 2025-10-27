@@ -1,1 +1,0 @@
-docker compose exec py2db python app.py

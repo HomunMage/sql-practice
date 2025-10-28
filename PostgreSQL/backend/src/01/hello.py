@@ -1,7 +1,7 @@
-# src/main.py
+# src/01/hello.py
 
 import asyncio
-from model.db import init_db, get_pool, close_db
+from ..model.db import init_db, get_pool, close_db
 
 async def main():
     # Initialize the database connection

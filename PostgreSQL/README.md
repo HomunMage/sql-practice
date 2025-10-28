@@ -17,7 +17,7 @@ docker compose up
 
 connect db
 ```
-docker compose exec backend python src/01/main.py
+docker compose exec backend python -m src.01.hello
 ```
 
 leave
@@ -32,39 +32,33 @@ docker compose down
     * requirements.txt
     * ```src/model/__init__.py```
     * ```src/model/db.py```
-    * ```src/01/main.py```
-
+    * ```src/01/*.py```
 
 ## 02 Add Tables
 
 This scenario creates a simple library management system with tables for authors, books, members, and borrowing history. It provides a basic structure for managing library data.
 
-
-docker compose exec py2db python library/create_library.py
-docker compose exec py2db python library/data_insertion.py
-docker compose exec py2db python library/top5.py
-
-## Basic Hello World SQL
-
-This section started with running SQL queries in a PostgreSQL database using Python.
-
 ```
-docker compose build
-docker compose up -d
-docker compose exec py2db python app.py
-docker compose exec py2db python create.py
-docker compose exec py2db python add.py
-docker compose exec py2db python print_all.py
+docker compose exec backend python -m src.02.create
+docker compose exec backend python -m src.02.insertion
+docker compose exec backend python -m src.02.top5
+docker compose exec backend python -m src.02.clean
 ```
+
+* related files:
+    * ```src/02/*.py```
+
+
 ## 03 CRUD
 
-```
-## Scenario: E-Commerce Database for a Company
-
-This scenario simulates an e-commerce platform with customers, orders, products, payments, and reviews. It allows you to manage orders, products, customer details, and payments.
+make SQL interface wrap as crud functions
 
 ```
-docker compose exec py2db python eCommerce/create_store.py
-docker compose exec py2db python eCommerce/data_insertion.py
-docker compose exec py2db python eCommerce/query.py
+docker compose exec backend python -m src.03.crud
+
 ```
+
+* related files:
+    * ```src/model/library_crud.py```
+    * ```src/03/*.py```
+
